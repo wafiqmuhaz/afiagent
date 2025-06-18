@@ -1,4 +1,3 @@
-# make / migrate to gemini
 import logging
 import requests
 
@@ -16,5 +15,7 @@ class GeminiClient:
         except requests.exceptions.RequestException as e:
             logger.error(f"Error fetching URL {url}: {e}")
             return ""
+
+
 
 

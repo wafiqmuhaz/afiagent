@@ -1,12 +1,12 @@
 import sys
 
 from .article import Article
-from .gemini_client import GeminiClient
+from .llm_client import LLMClient
 from .readability_extractor import ReadabilityExtractor
 
 
 class Crawler:
-    def crawl(self, url: str) -> Article:
+    def crawl(self, url: str, use_local_model: bool = False) -> Article:
         # To help LLMs better understand content, we extract clean
         # articles from HTML, convert them to markdown, and split
         # them into text and image blocks for one single and unified
@@ -17,8 +17,8 @@ class Crawler:
         #
         # Instead of using Jina's own markdown converter, we'll use
         # our own solution to get better readability results.
-        gemini_client = GeminiClient()
-        html = gemini_client.crawl(url, return_format="html")
+        llm_client = LLMClient()
+        html = llm_client.crawl(url, return_format="html", use_local_model=use_local_model)
         extractor = ReadabilityExtractor()
         article = extractor.extract_article(html)
         article.url = url
@@ -33,3 +33,5 @@ if __name__ == "__main__":
     crawler = Crawler()
     article = crawler.crawl(url)
     print(article.to_markdown())
+
+

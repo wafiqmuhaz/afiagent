@@ -1,356 +1,250 @@
-# afiagent
+# AfiAgent: An Autonomous AI Automation Framework
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Bahasa Indonesia](./README.md)
+> Originating from open source, giving back to open source
 
-> 源于开源，回馈开源
+AfiAgent is a robust, community-driven AI automation framework designed to empower users with advanced capabilities for complex task execution. It seamlessly integrates large language models (LLMs) with a suite of professional tools, including web search, content scraping, and Python code execution. Our core mission is to leverage the power of open-source contributions while actively giving back to the vibrant community that underpins this technology.
 
-AfiAgent adalah kerangka kerja otomatisasi AI berbasis komunitas yang dibangun di atas karya luar biasa dari komunitas sumber terbuka. Tujuan kami adalah mengintegrasikan model bahasa dengan alat profesional seperti pencarian web, perayap, dan eksekusi kode Python, sambil memberikan kontribusi kembali kepada komunitas yang memungkinkan semua ini.
+## Overview
 
-## Video Demo
+### Core Architecture
 
-> **Tugas**: Hitung indeks pengaruh DeepSeek R1 di HuggingFace. Indeks ini dapat dirancang dengan mempertimbangkan jumlah tertimbang dari faktor-faktor seperti pengikut, unduhan, dan suka.
+AfiAgent employs a sophisticated multi-agent system, orchestrated by a central Supervisor agent. This layered architecture enables the decomposition and efficient execution of intricate tasks by delegating responsibilities to specialized agents. The collaborative framework includes:
+
+*   **Coordinator:** The initial point of contact, handling user interactions and routing tasks.
+*   **Planner:** Analyzes tasks and devises strategic execution plans.
+*   **Supervisor:** Oversees and manages the execution flow across all agents.
+*   **Researcher:** Gathers and analyzes information from various sources.
+*   **Programmer (Coder):** Responsible for code generation, modification, and execution.
+*   **Browser:** Facilitates web navigation and information retrieval.
+*   **Reporter:** Compiles and summarizes workflow outcomes and reports.
+
+![AfiAgent Architecture](./assets/architecture.png)
+
+### Key Capabilities
+
+AfiAgent offers a comprehensive set of features designed to enhance automation and problem-solving:
+
+*   **Advanced LLM Integration:**
+    *   Supports Google Gemini API (gemini-2.0-flash) with automatic fallback for non-English APIs.
+    *   OpenAI-compatible API interface for broader model compatibility.
+    *   Multi-tiered LLM system adapts to varying task complexities (reasoning, basic, visual language models).
+*   **Intelligent Search & Retrieval:**
+    *   Leverages Tavily API for efficient web search.
+    *   Advanced content extraction capabilities.
+*   **Integrated Python Environment:**
+    *   Built-in Python REPL for interactive code execution.
+    *   Secure code execution environment.
+    *   Utilizes `uv` for streamlined package management.
+*   **Dynamic Workflow Management:**
+    *   Visual workflow diagrams for clarity and oversight.
+    *   Sophisticated multi-agent orchestration.
+    *   Effective task assignment and monitoring.
+
+### Why Choose AfiAgent?
+
+We firmly believe in the transformative power of open-source collaboration. AfiAgent's development has been significantly propelled by the contributions of outstanding open-source projects and communities. We are dedicated to reciprocating this support by fostering an environment of continuous improvement and community engagement. We welcome all forms of contributions, from minor documentation enhancements and bug fixes to new feature suggestions and problem reports.
+
+### Demonstration
+
+Witness AfiAgent in action with a practical example:
+
+> **Task:** Calculate the influence index of DeepSeek R1 on HuggingFace. This index can be designed by considering a weighted sum of factors such as followers, downloads, and likes.
 
 [![Demo](./assets/demo.gif)](./assets/demo.mp4)
 
-- [Tonton di YouTube](https://youtu.be/sZCHqrQBUGk)
-- [Unduh Video](https://github.com/afiagent/afiagent/blob/main/assets/demo.mp4)
+*   [Watch on YouTube](https://youtu.be/)
+*   [Download Video](https://github.com/afiagent/afiagent/blob/main/assets/demo.mp4)
 
-## Daftar Isi
-- [afiagent](#afiagent)
-  - [Video Demo](#video-demo)
-  - [Daftar Isi](#daftar-isi)
-  - [Mulai Cepat](#mulai-cepat)
-  - [Arsitektur](#arsitektur)
-  - [Fitur](#fitur)
-    - [Kemampuan Inti](#kemampuan-inti)
-    - [Alat dan Integrasi](#alat-dan-integrasi)
-    - [Fitur Pengembangan](#fitur-pengembangan)
-    - [Manajemen Alur Kerja](#manajemen-alur-kerja)
-  - [Mengapa Memilih AfiAgent?](#mengapa-memilih-afiagent)
-  - [Instalasi dan Pengaturan](#instalasi-dan-pengaturan)
-    - [Prasyarat](#prasyarat)
-    - [Langkah-langkah Instalasi](#langkah-langkah-instalasi)
-    - [Konfigurasi](#konfigurasi)
-    - [Mengkonfigurasi Git Hooks Pre-commit](#mengkonfigurasi-git-hooks-pre-commit)
-  - [Penggunaan](#penggunaan)
-    - [Eksekusi Dasar](#eksekusi-dasar)
-    - [Server API](#server-api)
-    - [Konfigurasi Lanjut](#konfigurasi-lanjut)
-    - [Sistem Prompt Agen](#sistem-prompt-agen)
-      - [Peran Agen Inti](#peran-agen-inti)
-      - [Arsitektur Sistem Prompt](#arsitektur-sistem-prompt)
-  - [Antarmuka Web](#antarmuka-web)
-  - [Pengembangan](#pengembangan)
-    - [Pengujian](#pengujian)
-    - [Kualitas Kode](#kualitas-kode)
-  - [Kontribusi](#kontribusi)
-  - [Lisensi](#lisensi)
-  - [Ucapan Terima Kasih](#ucapan-terima-kasih)
-  - [Integrasi Code Server](#integrasi-code-server)
-    - [Cara Kerja Integrasi](#cara-kerja-integrasi)
-    - [Meluncurkan Code Server](#meluncurkan-code-server)
-    - [Ketergantungan Baru](#ketergantungan-baru)
-    - [Alur Kerja yang Diperbarui](#alur-kerja-yang-diperbarui)
+## Requirements & Dependencies
 
-## Mulai Cepat
+Before setting up AfiAgent, ensure you have the following prerequisite installed:
+
+*   **`uv` Package Manager:** AfiAgent relies on `uv` for efficient dependency management and virtual environment creation. If you don't have `uv` installed, you can find installation instructions on its official GitHub repository or documentation.
+
+## Installation & Setup
+
+Follow these steps to get AfiAgent up and running on your local machine. This guide covers setting up the virtual environment, installing dependencies, and configuring necessary API keys.
+
+### Quick Start
+
+For a rapid deployment, execute the following commands:
 
 ```bash
-# Kloning repositori
+# Clone the repository
 git clone https://github.com/afiagent/afiagent.git
 cd afiagent
 
-# Buat dan aktifkan virtual environment dengan uv
+# Create and activate a virtual environment using uv
 uv python install 3.12
 uv venv --python 3.12
 
-source .venv/bin/activate  # Untuk Windows: .venv\Scripts\activate
+# Activate the virtual environment
+source .venv/bin/activate  # For Windows: .venv\Scripts\activate
 
-# Instal dependensi
+# Install project dependencies
 uv sync
 
-# Konfigurasi lingkungan
+# Configure environment variables
 cp .env.example .env
-# Edit file .env dan masukkan kunci API Anda
+# Open the .env file and populate it with your API keys
 
-# Jalankan proyek
+# Run the project
 uv run main.py
 ```
 
-## Arsitektur
+### Detailed Installation Steps
 
-AfiAgent mengimplementasikan sistem multi-agen berlapis, di mana agen Supervisor mengoordinasikan agen-agen khusus untuk menyelesaikan tugas-tugas kompleks:
+AfiAgent leverages `uv` as its primary package manager to simplify dependency handling.
 
-![Arsitektur AfiAgent](./assets/architecture.png)
+1.  **Create and Activate Virtual Environment:**
+    ```bash
+    uv python install 3.12
+    uv venv --python 3.12
+    ```
+    Activate the environment:
+    *   For Unix/macOS:
+        ```bash
+        source .venv/bin/activate
+        ```
+    *   For Windows:
+        ```bash
+        .venv\Scripts\activate
+        ```
 
-Sistem ini bekerja sama dengan agen-agen berikut:
+2.  **Install Project Dependencies:**
+    ```bash
+    uv sync
+    ```
 
-1. **Koordinator (Coordinator)**: Titik masuk alur kerja, menangani interaksi awal dan merutekan tugas.
-2. **Perencana (Planner)**: Menganalisis tugas dan mengembangkan strategi eksekusi.
-3. **Supervisor**: Mengawasi dan mengelola eksekusi agen lain.
-4. **Peneliti (Researcher)**: Mengumpulkan dan menganalisis informasi.
-5. **Programmer (Coder)**: Bertanggung jawab untuk pembuatan dan modifikasi kode.
-6. **Peramban (Browser)**: Melakukan penjelajahan web dan pengambilan informasi.
-7. **Pelapor (Reporter)**: Menghasilkan laporan dan ringkasan hasil alur kerja.
+### Configuration
 
-## Fitur
-
-### Kemampuan Inti
-- 🤖 **Integrasi LLM**
-    - Mendukung Google Gemini API (gemini-2.0-flash)
-    - Fallback otomatis ke Gemini (jika API berbahasa Mandarin terdeteksi)
-    - Antarmuka API yang kompatibel dengan OpenAI
-    - Sistem LLM multi-tingkat untuk beradaptasi dengan kompleksitas tugas yang berbeda
-
-### Alat dan Integrasi
-- 🔍 **Pencarian dan Pengambilan**
-    - Pencarian web melalui Tavily API
-    - Ekstraksi konten tingkat lanjut
-
-### Fitur Pengembangan
-- 🐍 **Integrasi Python**
-    - Python REPL bawaan
-    - Lingkungan eksekusi kode
-    - Menggunakan uv untuk manajemen paket
-
-### Manajemen Alur Kerja
-- 📊 **Visualisasi dan Kontrol**
-    - Visualisasi diagram alur kerja
-    - Orkes multi-agen
-    - Penugasan dan pemantauan tugas
-
-## Mengapa Memilih AfiAgent?
-
-Kami percaya pada kekuatan kolaborasi sumber terbuka. Implementasi proyek ini tidak akan mungkin terjadi tanpa dukungan dari proyek-proyek luar biasa berikut:
-- [Google Gemini API](https://ai.google.dev/): Menyediakan model bahasa yang kuat
-- [Tavily](https://tavily.com/): Menyediakan kemampuan pencarian
-- Dan banyak kontributor sumber terbuka lainnya
-
-Kami berkomitmen untuk memberikan kontribusi kembali kepada komunitas, dan kami menyambut semua bentuk kontribusi - baik itu perbaikan kesalahan ketik, peningkatan dokumentasi, laporan masalah, atau saran fitur. Silakan lihat [Panduan Kontribusi](CONTRIBUTING.md) kami untuk memulai.
-
-## Instalasi dan Pengaturan
-
-### Prasyarat
-
-- Manajer paket [uv](https://github.com/astral-sh/uv)
-
-### Langkah-langkah Instalasi
-
-AfiAgent menggunakan [uv](https://github.com/astral-sh/uv) sebagai manajer paket untuk menyederhanakan manajemen dependensi.
-Ikuti langkah-langkah di bawah ini untuk menyiapkan virtual environment dan menginstal dependensi yang diperlukan:
-
-```bash
-# Langkah 1: Buat dan aktifkan virtual environment dengan uv
-uv python install 3.12
-uv venv --python 3.12
-
-# Untuk sistem Unix/macOS:
-source .venv/bin/activate
-
-# Untuk sistem Windows:
-.venv\Scripts\activate
-
-# Langkah 2: Instal dependensi proyek
-uv sync
-```
-
-### Konfigurasi
-
-AfiAgent menggunakan sistem LLM tiga lapis untuk penalaran, tugas dasar, dan tugas bahasa visual. Buat file `.env` di direktori root proyek dan konfigurasikan variabel lingkungan berikut:
+AfiAgent utilizes a three-tiered LLM system for distinct functionalities: complex reasoning, basic text tasks, and visual language processing. To configure these models and other tools, create a `.env` file in the project's root directory and define the following environment variables:
 
 ```ini
-# Konfigurasi LLM Penalaran (untuk tugas penalaran kompleks)
+# Reasoning LLM Configuration (for complex analytical tasks)
 REASONING_MODEL=gemini-2.0-flash
 GEMINI_API_KEY=your_gemini_api_key
 
-# Konfigurasi LLM Dasar (untuk tugas sederhana)
-BASIC_MODEL=your_basic_model # Contoh: gpt-4o
-BASIC_API_KEY=your_basic_api_key
-
-# Konfigurasi LLM Bahasa Visual (untuk tugas yang melibatkan gambar)
-VL_MODEL=your_vl_model # Contoh: gpt-4o
-VL_API_KEY=your_vl_api_key
-
-# Kunci API Alat
+# Tool API Keys
 TAVILY_API_KEY=your_tavily_api_key
 
-# Konfigurasi Peramban
-CHROME_INSTANCE_PATH=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome  # Opsional, jalur ke executable Chrome
+# Browser Configuration (at folder: src/tools/browser.py)
+config=BrowserConfig(
+chrome_instance_path="/usr/bin/chromium-browser" //Change to your path
+)
+
+# Code-Server Configuration (at folder: src/tools/code_server_manager.py)
+config=BrowserConfig(
+"/usr/bin/code-server",  # or just "code-server" if in PATH
+)
 ```
 
-> **Catatan:**
->
-> - Sistem menggunakan model yang berbeda untuk jenis tugas yang berbeda:
->     - LLM Penalaran untuk keputusan dan analisis kompleks (sekarang default ke Gemini)
->     - LLM Dasar untuk tugas teks sederhana
->     - LLM Bahasa Visual untuk tugas yang melibatkan pemahaman gambar
-> - Jika model penalaran menggunakan API berbahasa Mandarin, itu akan secara otomatis mendeteksi dan kembali ke Gemini.
-> - Jika model dasar dan bahasa visual bukan Gemini, URL dasar mereka dapat disesuaikan secara independen.
-> - Setiap LLM dapat menggunakan kunci API yang berbeda.
-> - Pencarian Tavily secara default dikonfigurasi untuk mengembalikan hingga 5 hasil (Anda bisa mendapatkan kunci ini di [app.tavily.com](https://app.tavily.com/))
+**Important Notes on Configuration:**
 
-Anda dapat menyalin file `.env.example` sebagai template untuk memulai:
+*   The system dynamically selects models based on task requirements:
+    *   **Reasoning LLM:** Employed for intricate decision-making and analysis (defaults to Gemini).
+    *   **Basic LLM:** Used for simpler text-based operations.
+    *   **Visual Language LLM:** Dedicated to tasks involving image comprehension.
+*   If the reasoning model detects a Chinese-language API, it will automatically fall back to Gemini.
+*   For non-Gemini basic and visual language models, their base URLs can be independently customized.
+*   Each LLM can be configured with its own distinct API key.
+*   Tavily search is pre-configured to return up to 5 results. Obtain your Tavily API key from [app.tavily.com](https://app.tavily.com/).
+
+You can use the provided example file as a template:
 
 ```bash
 cp .env.example .env
 ```
 
-### Mengkonfigurasi Git Hooks Pre-commit
-AfiAgent menyertakan hook pre-commit yang menjalankan pemeriksaan kode dan pemformatan sebelum setiap commit. Ikuti langkah-langkah ini untuk mengaturnya:
+### Configuring Git Pre-commit Hooks
 
-1. Jadikan skrip pre-commit dapat dieksekusi:
-```bash
-chmod +x pre-commit
-```
+AfiAgent includes pre-commit hooks to enforce code quality and formatting standards before each commit. To set these up:
 
-2. Instal hook pre-commit:
-```bash
-ln -s ../../pre-commit .git/hooks/pre-commit
-```
+1.  **Make the pre-commit script executable:**
+    ```bash
+    chmod +x pre-commit
+    ```
 
-Hook pre-commit akan secara otomatis:
-- Menjalankan pemeriksaan kode (`make lint`)
-- Memformat kode (`make format`)
-- Menambahkan kembali file yang diformat ulang ke area staging
-- Mencegah commit jika ada kesalahan pemeriksaan kode atau pemformatan
+2.  **Install the pre-commit hook:**
+    ```bash
+    ln -s ../../pre-commit .git/hooks/pre-commit
+    ```
 
-## Penggunaan
+These pre-commit hooks will automatically:
+*   Execute code linting (`make lint`).
+*   Format the codebase (`make format`).
+*   Re-add any reformatted files to the staging area.
+*   Prevent commits if linting or formatting checks fail.
 
-### Eksekusi Dasar
+## Usage Examples
 
-Jalankan AfiAgent dengan pengaturan default:
+This section demonstrates how to run AfiAgent for basic operations and how to interact with its API server.
+
+### Basic Execution
+
+To run AfiAgent with its default settings, simply execute the main script:
 
 ```bash
 uv run main.py
 ```
 
-### Server API
+## Advanced Features
 
-AfiAgent menyediakan server API berbasis FastAPI yang mendukung respons streaming:
+AfiAgent is highly customizable, allowing users to fine-tune its behavior and integrate with external tools.
 
-```bash
-# Mulai server API
-make serve
+### Advanced Configuration
 
-# Atau jalankan langsung
-uv run server.py
-```
+AfiAgent's behavior can be extensively customized through various configuration files located in the `src/config` directory:
 
-Server API menyediakan endpoint berikut:
+*   `env.py`: Manages LLM models, API keys, and base URLs.
+*   `tools.py`: Allows customization of tool-specific settings (e.g., Tavily search result limits).
+*   `agents.py`: Enables modification of agent team composition and system prompts.
 
-- `POST /api/chat/stream`: Endpoint obrolan untuk panggilan LangGraph, respons streaming
-    - Body Permintaan:
-    ```json
-    {
-      "messages": [
-        {"role": "user", "content": "Masukkan kueri Anda di sini"}
-      ],
-      "debug": false
-    }
-    ```
-    - Mengembalikan aliran Server-Sent Events (SSE) yang berisi respons agen
+### Agent Prompt System
 
+AfiAgent employs a sophisticated prompt system, housed in the `src/prompts` directory, to precisely define the roles, behaviors, and responsibilities of each agent.
 
-### Konfigurasi Lanjut
+#### Core Agent Roles and Responsibilities
 
-AfiAgent dapat disesuaikan melalui berbagai file konfigurasi di direktori `src/config`:
-- `env.py`: Mengkonfigurasi model LLM, kunci API, dan URL dasar
-- `tools.py`: Menyesuaikan pengaturan khusus alat (misalnya, batas hasil pencarian Tavily)
-- `agents.py`: Memodifikasi komposisi tim dan prompt sistem agen
+*   **Supervisor (`src/prompts/supervisor.md`):** The orchestrator of the agent team. It coordinates tasks, analyzes requests, and assigns them to the most suitable expert agent. The Supervisor is also responsible for determining task completion and managing workflow transitions.
+*   **Researcher (`src/prompts/researcher.md`):** Specializes in information gathering through web searches and data collection. This agent utilizes Tavily search and web scraping functionalities, strictly avoiding mathematical computations or file operations.
+*   **Programmer (`src/prompts/coder.md`):** Functions as a professional software engineer, focusing on Python and bash scripting. Its responsibilities include:
+    *   Execution and analysis of Python code.
+    *   Execution of shell commands.
+    *   Technical troubleshooting and implementation.
+*   **File Manager (`src/prompts/file_manager.md`):** Handles all file system operations, with a particular emphasis on formatting and storing content in correct Markdown format.
+*   **Browser (`src/prompts/browser.md`):** An expert in web interaction, responsible for:
+    *   Website navigation.
+    *   Page interactions (clicks, input, scrolling).
+    *   Content extraction from web pages.
 
-### Sistem Prompt Agen
+#### Prompt System Architecture
 
-AfiAgent menggunakan sistem prompt yang canggih di direktori `src/prompts` untuk menentukan perilaku dan tanggung jawab agen:
+The prompt system leverages a templating engine (`src/prompts/template.py`) to:
+*   Load role-specific Markdown templates.
+*   Manage variable substitutions (e.g., current time, team member information).
+*   Format the system prompts for each individual agent.
 
-#### Peran Agen Inti
+Each agent's prompt is defined in a separate Markdown file, facilitating easy modification of their behavior and responsibilities without altering the core codebase.
 
-- **Supervisor ([`src/prompts/supervisor.md`](src/prompts/supervisor.md))**: Mengoordinasikan tim dan menetapkan tugas dengan menganalisis permintaan dan menentukan ahli mana yang akan menanganinya. Bertanggung jawab untuk memutuskan penyelesaian tugas dan transisi alur kerja.
+### Code Server Integration
 
-- **Peneliti ([`src/prompts/researcher.md`](src/prompts/researcher.md))**: Mengkhususkan diri dalam mengumpulkan informasi melalui pencarian web dan pengumpulan data. Menggunakan pencarian Tavily dan fungsionalitas perayapan web, menghindari perhitungan matematika atau operasi file.
+AfiAgent now features integrated support for automated code execution via Code Server. This allows agents to execute and test generated code within an isolated and interactive environment, significantly enhancing reliability and accuracy.
 
-- **Programmer ([`src/prompts/coder.md`](src/prompts/coder.md))**: Peran insinyur perangkat lunak profesional yang berfokus pada skrip Python dan bash. Menangani:
-    - Eksekusi dan analisis kode Python
-    - Eksekusi perintah Shell
-    - Pemecahan masalah teknis dan implementasi
+#### How the Integration Works
 
-- **Manajer File ([`src/prompts/file_manager.md`](src/prompts/file_manager.md))**: Menangani semua operasi sistem file, dengan fokus pada pemformatan dan penyimpanan konten dalam format markdown yang benar.
+When an agent receives a request involving code generation or execution, the following sequence occurs:
+1.  Code Server is launched within the sandboxed environment.
+2.  The generated code is transmitted to Code Server for execution.
+3.  The output and execution results from Code Server are captured.
+4.  These results are then utilized by the agent to proceed with the task or provide feedback to the user.
 
-- **Peramban ([`src/prompts/browser.md`](src/prompts/browser.md))**: Pakar interaksi web, menangani:
-    - Navigasi situs web
-    - Interaksi halaman (klik, input, gulir)
-    - Ekstraksi konten dari halaman web
+#### Manual Code Server Launch
 
-#### Arsitektur Sistem Prompt
-
-Sistem prompt menggunakan mesin template ([`src/prompts/template.py`](src/prompts/template.py)) untuk:
-- Memuat template markdown khusus peran
-- Menangani penggantian variabel (misalnya, waktu saat ini, informasi anggota tim)
-- Memformat prompt sistem untuk setiap agen
-
-Setiap prompt agen didefinisikan dalam file markdown terpisah, memungkinkan modifikasi perilaku dan tanggung jawab yang mudah tanpa mengubah kode dasar.
-
-## Antarmuka Web
-
-AfiAgent menyediakan antarmuka web default.
-
-Silakan lihat proyek [afiagent/afiagent-web](https://github.com/afiagent/afiagent-web) untuk informasi lebih lanjut.
-
-## Pengembangan
-
-### Pengujian
-
-Jalankan suite pengujian:
-
-```bash
-# Jalankan semua pengujian
-make test
-
-# Jalankan file pengujian tertentu
-pytest tests/integration/test_workflow.py
-
-# Jalankan pengujian cakupan
-make coverage
-```
-
-### Kualitas Kode
-
-```bash
-# Jalankan pemeriksaan kode
-make lint
-
-# Format kode
-make format
-```
-
-## Kontribusi
-
-Kami menyambut semua bentuk kontribusi! Baik itu memperbaiki kesalahan ketik, meningkatkan dokumentasi, atau menambahkan fitur baru, bantuan Anda akan sangat dihargai. Silakan lihat [Panduan Kontribusi](CONTRIBUTING.md) kami untuk memulai.
-
-## Lisensi
-
-Proyek ini adalah sumber terbuka, berdasarkan [Lisensi MIT](LICENSE).
-
-## Ucapan Terima Kasih
-
-Terima kasih khusus kepada semua proyek sumber terbuka dan kontributor yang memungkinkan AfiAgent. Kami berdiri di atas bahu para raksasa.
-
-## Integrasi Code Server
-
-AfiAgent sekarang mendukung eksekusi kode otomatis menggunakan Code Server setiap kali pengguna meminta pembuatan kode. Ini memungkinkan agen untuk menjalankan dan menguji kode yang dihasilkan dalam lingkungan yang terisolasi dan interaktif.
-
-### Cara Kerja Integrasi
-
-Ketika agen menerima permintaan yang melibatkan pembuatan atau eksekusi kode, agen akan:
-1. Meluncurkan Code Server di lingkungan sandbox.
-2. Mengirim kode yang dihasilkan ke Code Server untuk eksekusi.
-3. Menangkap output dan hasil eksekusi dari Code Server.
-4. Menggunakan hasil ini untuk melanjutkan tugas atau memberikan umpan balik kepada pengguna.
-
-### Meluncurkan Code Server
-
-Code Server dapat diluncurkan secara manual menggunakan perintah berikut:
+For development or debugging purposes, Code Server can be launched manually using the following command:
 
 ```bash
 PASSWORD=4f9c26af9e42b1b8 /usr/bin/code-server \
@@ -360,21 +254,26 @@ PASSWORD=4f9c26af9e42b1b8 /usr/bin/code-server \
   /home/ubuntu/AfiAgent
 ```
 
-- `PASSWORD=4f9c26af9e42b1b8`: Menetapkan kata sandi untuk akses Code Server. Kata sandi ini harus dijaga kerahasiaannya.
-- `--bind-addr 0.0.0.0:8329`: Mengikat Code Server ke semua antarmuka jaringan yang tersedia pada port 8329. Ini memungkinkan akses dari luar sandbox.
-- `--auth password`: Mengaktifkan otentikasi berbasis kata sandi.
-- `--disable-workspace-trust`: Menonaktifkan fitur kepercayaan ruang kerja, yang berguna untuk lingkungan pengembangan yang cepat.
-- `/home/ubuntu/AfiAgent`: Menentukan direktori ruang kerja untuk Code Server. Ini adalah direktori root proyek AfiAgent.
+*   `PASSWORD=4f9c26af9e42b1b8`: Sets the password for Code Server access. This password should be kept confidential.
+*   `--bind-addr 0.0.0.0:8329`: Binds Code Server to all available network interfaces on port 8329, enabling external access from the sandbox.
+*   `--auth password`: Activates password-based authentication.
+*   `--disable-workspace-trust`: Disables the workspace trust feature, which is useful for rapid development environments.
+*   `/home/ubuntu/AfiAgent`: Specifies the workspace directory for Code Server. This is the root directory of the AfiAgent project.
 
-Setelah diluncurkan, Code Server akan tersedia melalui URL yang diekspos oleh Manus (misalnya, `https://8329-ixwutjurcmch5eqtvwerp-fb845e4a.manus.computer`). Anda dapat mengaksesnya di browser Anda menggunakan kata sandi yang ditentukan.
+## Troubleshooting
 
-### Ketergantungan Baru
+*(Content to be added based on common issues and their resolutions)*
 
-Integrasi Code Server memperkenalkan ketergantungan baru:
-- **Code Server**: Aplikasi Code Server itu sendiri, yang sudah diinstal di lingkungan sandbox.
+## Contributions & License
 
-Tidak ada dependensi Python tambahan yang diperlukan untuk integrasi ini, karena Code Server beroperasi secara independen dan berkomunikasi dengan agen melalui antarmuka baris perintah atau API.
+### Contributions
 
-### Alur Kerja yang Diperbarui
+We welcome all forms of contributions to AfiAgent! Whether you're fixing a typo, enhancing documentation, or adding new features, your assistance is greatly appreciated. Please refer to our [Contribution Guidelines](CONTRIBUTING.md) to get started.
 
-Alur kerja agen telah diperbarui untuk secara otomatis memicu Code Server ketika tugas-tugas tertentu yang melibatkan eksekusi kode terdeteksi. Ini memastikan bahwa agen memiliki lingkungan yang kuat untuk menguji dan memvalidasi kode yang dihasilkan, meningkatkan keandalan dan akurasi respons agen.
+### License
+
+This project is open-source, distributed under the [MIT License](LICENSE).
+
+### Acknowledgements
+
+Special thanks to all the open-source projects and contributors who have made AfiAgent possible. We stand on the shoulders of giants.

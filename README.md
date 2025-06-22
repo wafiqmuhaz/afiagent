@@ -51,9 +51,16 @@ We firmly believe in the transformative power of open-source collaboration. AfiA
 
 Witness AfiAgent in action with a practical example:
 
-> **Task:** Calculate the influence index of DeepSeek R1 on HuggingFace. This index can be designed by considering a weighted sum of factors such as followers, downloads, and likes.
+> **Task 1:** Go to youtube and give me 10 that are most trending now.
 
-[![Demo](./assets/demo.gif)](./assets/demo.mp4)
+[![Demo](./assets/demo1.gif)](./assets/demo1.mp4)
+
+*   [Watch on YouTube](https://youtu.be/)
+*   [Download Video](https://github.com/afiagent/afiagent/blob/main/assets/demo.mp4)
+
+> **Task 2:** Please generate a simple Snake game using only the following Python packages: `turtle`, `time`, and `random`. The code should be organized into: main.py, score.py, canvas.py and controller.py at code-server.
+
+[![Demo](./assets/demo2.gif)](./assets/demo2.mp4)
 
 *   [Watch on YouTube](https://youtu.be/)
 *   [Download Video](https://github.com/afiagent/afiagent/blob/main/assets/demo.mp4)
